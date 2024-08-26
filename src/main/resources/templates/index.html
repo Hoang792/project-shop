@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <title>Phone List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background: white;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #343a40;
+        }
+        .table th, .table td {
+            text-align: center;
+        }
+        .btn {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container col-8">
+    <h1>Manage Phones</h1>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>Phone Name</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="phone : ${phones}">
+            <td th:text="${phone.id}"></td>
+            <td th:text="${phone.name}"></td>
+            <td th:text="${phone.brand}"></td>
+            <td th:text="${phone.price}"></td>
+            <td><img th:src="@{'/images/'+${phone.image}}" class="img-thumbnail" width="100" height="100"/></td>
+            <td>
+                <a th:href="@{/edit?id={id}(id=${phone.id})}" class="btn btn-primary">Edit</a>
+                <a th:href="@{/delete?id={id}(id=${phone.id})}" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa mục này không?');">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <a href="/add" class="btn btn-success">Add Phone</a>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

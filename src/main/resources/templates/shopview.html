@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Online</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .search-container {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+        }
+        .menu {
+            background-color: darkgray;
+        }
+        .header {
+            color: white;
+            padding: 15px 0;
+            position: relative; /* Để sử dụng vị trí tuyệt đối cho .search-container */
+        }
+        .logo {
+            background-color: #ee3838;
+            padding: 10px;
+        }
+        .navbar {
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .product-image {
+            width: 40%;
+            height: auto;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .search-container .btn {
+            margin-left: 2px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo">
+        <h1 style="margin-left: 15px">MEDIA MART</h1>
+    </div>
+    <div class="menu">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="/shopview">Trang chủ</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Dịch vụ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Khuyến mại</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="search-container">
+        <form action="/search" method="get" class="form-inline">
+        <input type="text" name="query" class="form-control" placeholder="Tìm kiếm sản phẩm..." style=" margin-top: 19px; width: 300px; display: inline-block;">
+        <button class="btn btn-primary">Tìm kiếm</button>
+
+        <a href="/cart" class="btn btn-warning">Giỏ hàng <i class="fas fa-shopping-cart"></i></a>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="text-center">Điện thoại mới nhất</h2>
+    <div class="row">
+        <div class="col-md-4" th:each="phone : ${phones}">
+            <div class="product-card">
+                <img th:src="@{'/images/' + ${phone.image}}" class="product-image" alt="${phone.name}"/>
+                <div class="p-3">
+                    <h5 th:text="${phone.name}"></h5>
+                    <p th:text="'Giá: ' + ${phone.price} + ' đ'"></p>
+                    <a th:href="@{/cart/add(id=${phone.id})}" class="btn btn-success" onclick="return confirm('Sản phẩm đã được thêm thành công');" >Thêm vào giỏ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Shop Online. All rights reserved.</p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
